@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AirMonitor.Styles">
+    <Style
+        x:Key="imageButtonHelp"
+        TargetType="ImageButton">
+        <Setter
+            Property="WidthRequest"
+            Value="30" />
+        <Setter
+            Property="HeightRequest"
+            Value="30" />
+        <Setter
+            Property="HorizontalOptions"
+            Value="End" />
+        <Setter
+            Property="VerticalOptions"
+            Value="Start" />
+        <Setter
+            Property="BackgroundColor"
+            Value="Transparent" />
+        <Setter
+            Property="Margin"
+            Value="0,20,15,0" />
+    </Style>
+    <Style
+        x:Key="mainStackLayout"
+        TargetType="StackLayout">
+        <Setter
+            Property="Padding"
+            Value="15" />
+    </Style>
+    <Style
+        x:Key="horizontalLine"
+        TargetType="BoxView">
+        <Setter
+            Property="HeightRequest"
+            Value="1" />
+        <Setter
+            Property="BackgroundColor"
+            Value="{StaticResource PencilGray}" />
+    </Style>
+    <Style
+        x:Key="verticalLine"
+        TargetType="BoxView">
+        <Setter
+            Property="WidthRequest"
+            Value="1" />
+        <Setter
+            Property="BackgroundColor"
+            Value="{StaticResource PencilGray}" />
+    </Style>
+    <Style
+        x:Key="labelMainInfo"
+        TargetType="Label">
+        <Setter
+            Property="HorizontalTextAlignment"
+            Value="Center" />
+        <Setter
+            Property="FontAttributes"
+            Value="Bold" />
+        <Setter
+            Property="FontSize"
+            Value="Large" />
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource ClearBlack}" />
+    </Style>
+    <Style
+        x:Key="labelExtendedInfo"
+        TargetType="Label">
+        <Setter
+            Property="HorizontalOptions"
+            Value="Start" />
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource PencilGray}" />
+    </Style>
+    <Style
+        x:Key="mainFrame"
+        TargetType="Frame">
+        <Setter
+            Property="BorderColor"
+            Value="{StaticResource PencilGray}" />
+        <Setter
+            Property="HeightRequest"
+            Value="100" />
+        <Setter
+            Property="WidthRequest"
+            Value="100" />
+        <Setter
+            Property="HorizontalOptions"
+            Value="Center" />
+        <Setter
+            Property="VerticalOptions"
+            Value="Center" />
+        <Setter
+            Property="CornerRadius"
+            Value="90" />
+        <Setter
+            Property="BackgroundColor"
+            Value="{StaticResource AppleGreen}" />
+        <Setter
+            Property="Padding"
+            Value="0" />
+        <Setter
+            Property="Margin"
+            Value="0,20,0,0" />
+    </Style>
+    <Style
+        x:Key="mainFrameLabel"
+        TargetType="Label">
+        <Setter
+            Property="HorizontalTextAlignment"
+            Value="Center" />
+        <Setter
+            Property="VerticalTextAlignment"
+            Value="Center" />
+    </Style>
+    <Style
+        x:Key="spanMainCounter"
+        TargetType="Span">
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource ClearBlack}" />
+        <Setter
+            Property="FontSize"
+            Value="35" />
+        <Setter
+            Property="FontAttributes"
+            Value="Bold" />
+    </Style>
+    <Style
+        x:Key="spanMainCounterUnit"
+        TargetType="Span">
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource PencilGray}" />
+        <Setter
+            Property="FontSize"
+            Value="Small" />
+    </Style>
+    <Style
+        x:Key="spanPMCounterQuantity"
+        TargetType="Span">
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource ClearBlack}" />
+        <Setter
+            Property="FontSize"
+            Value="20" />
+    </Style>
+    <Style
+        x:Key="spanPMCounterUnit"
+        TargetType="Span">
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource ClearBlack}" />
+        <Setter
+            Property="FontSize"
+            Value="15" />
+    </Style>
+    <Style
+        x:Key="labelSectionHeader"
+        TargetType="Label">
+        <Setter
+            Property="TextColor"
+            Value="{StaticResource ClearBlack}" />
+        <Setter
+            Property="FontSize"
+            Value="20" />
+    </Style>
+    <Style
+        x:Key="slider"
+        TargetType="Slider">
+        <Setter
+            Property="MinimumTrackColor"
+            Value="{StaticResource LightBlue}" />
+        <Setter
+            Property="MaximumTrackColor"
+            Value="{StaticResource LightBlue}" />
+        <Setter
+            Property="ThumbColor"
+            Value="{StaticResource LightBlue}" />
+    </Style>
+</ResourceDictionary>

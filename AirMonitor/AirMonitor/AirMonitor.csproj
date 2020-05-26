@@ -24,6 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Styles\Colors.xaml.cs">
+      <DependentUpon>Colors.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Styles\Styles.xaml.cs">
+      <DependentUpon>Styles.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Controls\ContentWithHeader.xaml.cs">
       <DependentUpon>ContentWithHeader.xaml</DependentUpon>
     </Compile>

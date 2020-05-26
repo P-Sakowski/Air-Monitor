@@ -10,55 +10,34 @@
 
     <ScrollView>
         <Grid>
-
             <StackLayout
-                Padding="12">
-            <Frame
-                BorderColor="#534F4F"
-                HeightRequest="100"
-                WidthRequest="100"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                CornerRadius="90"
-                BackgroundColor="#47CB27"
-                Padding="0"
-                Margin="0,20,0,0">
+                Style="{StaticResource mainStackLayout}">
+                <Frame
+                    Style="{StaticResource mainFrame}">
+                    <Label
+                        Style="{StaticResource mainFrameLabel}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    Style="{StaticResource spanMainCounter}"
+                                    Text="56" />
+                                <Span
+                                    Text="{x:Static x:Environment.NewLine}" />
+                                <Span
+                                    Text="CAQI"
+                                    Style="{StaticResource spanMainCounterUnit}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Frame>
                 <Label
-                    HorizontalTextAlignment="Center"
-                    VerticalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span
-                                Text="56"
-                                TextColor="#000000"
-                                FontSize="35"
-                                FontAttributes="Bold">
-                            </Span>
-                            <Span
-                                Text="{x:Static x:Environment.NewLine}">
-                            </Span>
-                            <Span
-                                Text="CAQI"
-                                FontSize="Small"
-                                TextColor="#534F4F">
-                            </Span>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-            </Frame>
-            <Label
                 Text="Świetna jakość!"
-                HorizontalTextAlignment="Center"
-                FontAttributes="Bold"
-                FontSize="Large"
-                TextColor="#2F2929" />
+                Style="{StaticResource labelMainInfo}" />
             <Label
                 Text="Możesz bezpiecznie wyjść z domu bez swojej maski anty-smogowej i nie bać się o swoje zdrowie."
-                HorizontalOptions="Start"
-                TextColor="#534F4F" />
+                Style="{StaticResource labelExtendedInfo}" />
             <BoxView
-                HeightRequest="1"
-                BackgroundColor="#827C7C" />
+                Style="{StaticResource horizontalLine}" />
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition
@@ -77,24 +56,20 @@
                                 <FormattedString>
                                     <Span
                                         Text="34"
-                                        FontSize="20"
-                                        TextColor="Black" />
+                                        Style="{StaticResource spanPMCounterQuantity}" />
                                     <Span
                                         Text="mg/m3"
-                                        FontSize="15"
-                                        TextColor="Black" />
+                                        Style="{StaticResource spanPMCounterUnit}" />
                                     <Span
                                         Text="(137%)"
-                                        FontSize="20"
-                                        TextColor="Black" />
+                                        Style="{StaticResource spanPMCounterQuantity}" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
                     </controls:ContentWithHeader.ControlContent>
                 </controls:ContentWithHeader>
                 <BoxView
-                    WidthRequest="1"
-                    BackgroundColor="#827C7C"
+                    Style="{StaticResource verticalLine}"
                     Grid.Column="1">
                 </BoxView>
                 <controls:ContentWithHeader
@@ -104,75 +79,60 @@
                         <Label>
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span
-                                        Text="67"
-                                        FontSize="20"
-                                        TextColor="Black" />
-                                    <Span
-                                        Text="mg/m3"
-                                        FontSize="15"
-                                        TextColor="Black" />
-                                    <Span
-                                        Text="(135%)"
-                                        FontSize="20"
-                                        TextColor="Black" />
-                                </FormattedString>
+                                        <Span
+                                            Text="67"
+                                            Style="{StaticResource spanPMCounterQuantity}" />
+                                        <Span
+                                            Text="mg/m3"
+                                            Style="{StaticResource spanPMCounterUnit}" />
+                                        <Span
+                                            Text="(135%)"
+                                            Style="{StaticResource spanPMCounterQuantity}" />
+                                    </FormattedString>
                             </Label.FormattedText>
                         </Label>
                     </controls:ContentWithHeader.ControlContent>
                 </controls:ContentWithHeader>
             </Grid>
             <BoxView
-                HeightRequest="1"
-                BackgroundColor="#827C7C" />
+                Style="{StaticResource horizontalLine}"/>
             <controls:ContentWithHeader
                 Title="Wilgotność">
                 <controls:ContentWithHeader.ControlContent>
                     <StackLayout>
-                        <Label
-                            Text="95%"
-                            FontSize="20"
-                            TextColor="Black" />
-                        <Slider
-                            Value="0.95"
-                            MinimumTrackColor="Blue"
-                            MaximumTrackColor="LightBlue"
-                            ThumbColor="Blue">
-                        </Slider>
+                            <Label
+                                Text="95%"
+                                Style="{StaticResource labelSectionHeader}" />
+                            <Slider
+                                Value="0.95"
+                                Style="{StaticResource slider}">
+                            </Slider>
                     </StackLayout>
                 </controls:ContentWithHeader.ControlContent>
             </controls:ContentWithHeader>
-            <BoxView
-                HeightRequest="1"
-                BackgroundColor="#827C7C" />
-            <controls:ContentWithHeader
-                Title="Ciśnienie">
+                <BoxView
+                    Style="{StaticResource horizontalLine}" />
+                <controls:ContentWithHeader
+                    Title="Ciśnienie">
                 <controls:ContentWithHeader.ControlContent>
                     <StackLayout>
                         <Label
                             Text="1026 hPa"
-                            FontSize="20"
-                            TextColor="Black" />
+                            Style="{StaticResource labelSectionHeader}" />
                         <Slider
                             Maximum="1100"
                             Minimum="900"
                             Value="1026"
-                            MinimumTrackColor="Blue"
-                            MaximumTrackColor="LightBlue"
-                            ThumbColor="Blue">
+                            Style="{StaticResource slider}">
                         </Slider>
                     </StackLayout>
                 </controls:ContentWithHeader.ControlContent>
             </controls:ContentWithHeader>
         </StackLayout>
             <ImageButton
-                WidthRequest="30"
-                HeightRequest="30"
-                HorizontalOptions="End"
-                VerticalOptions="Start"
-                BackgroundColor="Transparent"
+                Style="{StaticResource imageButtonHelp}"
                 Source="{local:EmbeddedImage ResourceId=AirMonitor.Images.question_mark.png}"
-                Clicked="Button_Help_Click" Margin="0,20,15,0" />
+                Clicked="Button_Help_Click"/>
         </Grid>
     </ScrollView>
 </ContentPage>

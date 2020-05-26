@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="AirMonitor.Colors">
+    <Color
+        x:Key="ClearBlack"
+        x:FactoryMethod="FromHex">
+        <x:Arguments>
+            <x:String>#000000</x:String>
+        </x:Arguments>
+    </Color>
+    <Color
+        x:Key="LightBlue"
+        x:FactoryMethod="FromHex">
+        <x:Arguments>
+            <x:String>#72bcd4</x:String>
+        </x:Arguments>
+    </Color>
+    <Color
+        x:Key="PencilGray"
+        x:FactoryMethod="FromHex">
+        <x:Arguments>
+            <x:String>#534F4F</x:String>
+        </x:Arguments>
+    </Color>
+    <Color
+        x:Key="AppleGreen"
+        x:FactoryMethod="FromHex">
+        <x:Arguments>
+            <x:String>#47CB27</x:String>
+        </x:Arguments>
+    </Color>
+</ResourceDictionary>
