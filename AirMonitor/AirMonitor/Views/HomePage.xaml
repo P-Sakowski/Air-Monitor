@@ -9,7 +9,7 @@
         <StackLayout>
             <Button Text="Pokaż aktualne dane"
                     Style="{StaticResource buttonShowResults}"
-                    Clicked="Button_ShowResults_Clicked"/>
+                    Command="{Binding Navigate}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
