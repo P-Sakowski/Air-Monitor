@@ -6,7 +6,7 @@
              xmlns:controls ="clr-namespace:AirMonitor.Views.Controls"
              xmlns:local="clr-namespace:AirMonitor"
              mc:Ignorable="d"
-             x:Class="AirMonitor.MainPage">
+             x:Class="AirMonitor.DetailsPage">
 
     <ScrollView>
         <Grid>
