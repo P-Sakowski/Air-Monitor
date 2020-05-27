@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:views="clr-namespace:AirMonitor.Views"
+    xmlns:local="clr-namespace:AirMonitor"
+    x:Class="AirMonitor.Views.MainTabbedPage"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    android:TabbedPage.ToolbarPlacement="Bottom">
+    <NavigationPage
+        Title="Strona Główna"
+        IconImageSource="{local:EmbeddedImage ResourceId=AirMonitor.Images.MainMenu_icon.png}">
+        <x:Arguments>
+            <views:HomePage
+                Title="Strona Główna"/>
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage
+        Title="Ustawienia"
+        IconImageSource="{local:EmbeddedImage ResourceId=AirMonitor.Images.Settings_icon.png}">
+        <x:Arguments>
+            <views:SettingsPage
+                Title="Ustawienia" />
+        </x:Arguments>
+    </NavigationPage>
+</TabbedPage>

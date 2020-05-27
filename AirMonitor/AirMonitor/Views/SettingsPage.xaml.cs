@@ -10,16 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace AirMonitor.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomePage : ContentPage
+    public partial class SettingsPage : ContentPage
     {
-        public HomePage()
+        public SettingsPage()
         {
             InitializeComponent();
-        }
-
-        private void Button_ShowResults_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new DetailsPage());
         }
     }
 }
