@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirMonitor.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace AirMonitor
         public DetailsPage()
         {
             InitializeComponent();
+
+            BindingContext = new DetailsViewModel();
         }
         private void Button_Help_Click(object sender, EventArgs e)
         {

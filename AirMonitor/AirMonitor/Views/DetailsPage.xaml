@@ -1,13 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls ="clr-namespace:AirMonitor.Views.Controls"
-             xmlns:local="clr-namespace:AirMonitor"
-             mc:Ignorable="d"
-             x:Class="AirMonitor.DetailsPage">
-
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:AirMonitor.Views.Controls"
+    xmlns:local="clr-namespace:AirMonitor"
+    xmlns:viewmodels="clr-namespace:AirMonitor.ViewModels"
+    mc:Ignorable="d"
+    x:Class="AirMonitor.DetailsPage">
+    <ContentPage.Resources>
+        <viewmodels:IntToDoubleConverter
+            x:Key="intToDouble" />
+    </ContentPage.Resources>
     <ScrollView>
         <Grid>
             <StackLayout
@@ -20,7 +25,7 @@
                             <FormattedString>
                                 <Span
                                     Style="{StaticResource spanMainCounter}"
-                                    Text="56" />
+                                    Text="{Binding CAQI}" />
                                 <Span
                                     Text="{x:Static x:Environment.NewLine}" />
                                 <Span
@@ -31,10 +36,10 @@
                     </Label>
                 </Frame>
                 <Label
-                Text="Świetna jakość!"
-                Style="{StaticResource labelMainInfo}" />
+                    Text="{Binding CAQIShortInfo}"
+                    Style="{StaticResource labelMainInfo}" />
             <Label
-                Text="Możesz bezpiecznie wyjść z domu bez swojej maski anty-smogowej i nie bać się o swoje zdrowie."
+                Text="{Binding CAQILongInfo}"
                 Style="{StaticResource labelExtendedInfo}" />
             <BoxView
                 Style="{StaticResource horizontalLine}" />
@@ -55,13 +60,13 @@
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span
-                                        Text="34"
+                                        Text="{Binding PM25}"
                                         Style="{StaticResource spanPMCounterQuantity}" />
                                     <Span
                                         Text="mg/m3"
                                         Style="{StaticResource spanPMCounterUnit}" />
                                     <Span
-                                        Text="(137%)"
+                                        Text="{Binding PM25Percentage, StringFormat='({0}%)'}"
                                         Style="{StaticResource spanPMCounterQuantity}" />
                                 </FormattedString>
                             </Label.FormattedText>
@@ -80,13 +85,13 @@
                             <Label.FormattedText>
                                 <FormattedString>
                                         <Span
-                                            Text="67"
+                                            Text="{Binding PM10}"
                                             Style="{StaticResource spanPMCounterQuantity}" />
                                         <Span
                                             Text="mg/m3"
                                             Style="{StaticResource spanPMCounterUnit}" />
                                         <Span
-                                            Text="(135%)"
+                                            Text="{Binding PM10Percentage, StringFormat='({0}%)'}"
                                             Style="{StaticResource spanPMCounterQuantity}" />
                                     </FormattedString>
                             </Label.FormattedText>
@@ -101,10 +106,10 @@
                 <controls:ContentWithHeader.ControlContent>
                     <StackLayout>
                             <Label
-                                Text="95%"
+                                Text="{Binding Humidity, StringFormat='{0}%'}"
                                 Style="{StaticResource labelSectionHeader}" />
                             <Slider
-                                Value="0.95"
+                                Value="{Binding Humidity, Converter={StaticResource intToDouble}}"
                                 Style="{StaticResource slider}">
                             </Slider>
                     </StackLayout>
@@ -117,12 +122,12 @@
                 <controls:ContentWithHeader.ControlContent>
                     <StackLayout>
                         <Label
-                            Text="1026 hPa"
+                            Text="{Binding Pressure, StringFormat='{0} hPa'}"
                             Style="{StaticResource labelSectionHeader}" />
                         <Slider
                             Maximum="1100"
                             Minimum="900"
-                            Value="1026"
+                            Value="{Binding Pressure}"
                             Style="{StaticResource slider}">
                         </Slider>
                     </StackLayout>
