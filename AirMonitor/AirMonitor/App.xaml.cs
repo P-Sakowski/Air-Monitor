@@ -1,7 +1,9 @@
 ﻿using AirMonitor.Views;
 using System;
+using System.Net.Http;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using AirMonitor;
 
 namespace AirMonitor
 {

@@ -1,15 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="AirMonitor.Views.HomePage">
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    x:Class="AirMonitor.Views.HomePage">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Pokaż aktualne dane"
-                    Style="{StaticResource buttonShowResults}"
-                    Command="{Binding Navigate}"/>
+            <ListView
+                x:Name="MeasurementsList"
+                ItemsSource="{Binding Measurements}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell
+                            Text="{Binding Installation.Address.Description}"
+                            Detail="{Binding Current.Indexes[0].Value, StringFormat='CAQI: {0}'}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

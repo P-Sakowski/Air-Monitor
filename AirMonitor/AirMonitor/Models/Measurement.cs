@@ -9,5 +9,6 @@ namespace AirMonitor.Models
         public MeasurementItem Current { get; set; }
         public IEnumerable<MeasurementItem> History { get; set; }
         public IEnumerable<MeasurementItem> Forecast { get; set; }
+        public Installation Installation { get; set; }
     }
 }

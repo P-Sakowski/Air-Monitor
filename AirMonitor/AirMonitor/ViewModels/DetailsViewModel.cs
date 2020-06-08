@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace AirMonitor.ViewModels
 {
-    class DetailsViewModel : INotifyPropertyChanged
+    class DetailsViewModel : BaseViewModel
     {
         private int caqi, pm25, pm10, humidity, pm25Percentage, pm10Percentage, pressure;
         private string caqiShortInfo, caqiLongInfo;
