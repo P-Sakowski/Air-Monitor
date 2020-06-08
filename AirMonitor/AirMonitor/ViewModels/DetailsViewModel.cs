@@ -161,11 +161,6 @@ namespace AirMonitor.ViewModels
             this.Pressure = 1026;
             this.Humidity = 95;
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
     public class IntToDoubleConverter : IValueConverter
     {

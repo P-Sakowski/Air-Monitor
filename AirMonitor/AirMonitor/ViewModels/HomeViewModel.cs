@@ -19,9 +19,11 @@ namespace AirMonitor.ViewModels
     {
         private const string URL = "https://airapi.airly.eu/v2/";
         private const string ApiKey = "xMyHABfmXx2ix98m1vRziQzBGERuHaOR";
-        private readonly string Type = "installations/nearest";
-        private readonly string Type2 = "measurements/installation";
+        private const string Type = "installations/nearest";
+        private const string Type2 = "measurements/installation";
         public List<Measurement> Measurements { get; set; }
+        private ObservableCollection<Measurement> _MeasurementList = new ObservableCollection<Measurement>();
+        public ObservableCollection<Measurement> MeasurementList { get { return _MeasurementList; } set { _MeasurementList = value; OnPropertyChanged(nameof(MeasurementList)); } }
         public INavigation Navigation { get; set; }
         public HomeViewModel(INavigation navigation)
         {
@@ -29,7 +31,7 @@ namespace AirMonitor.ViewModels
 
             Initialize();
         }
-        
+
         public ICommand Navigate => new Command(NavigateToPage);
 
         public void NavigateToPage()
@@ -43,6 +45,8 @@ namespace AirMonitor.ViewModels
             IEnumerable<Installation> installations = await GetInstallations(location);
             IEnumerable<Measurement> measurements = await GetMeasurements(installations);
             Measurements = new List<Measurement>(measurements);
+            MeasurementList = new ObservableCollection<Measurement>(Measurements);
+            Console.WriteLine();
         }
 
         public async Task<IEnumerable<Installation>> GetInstallations(Location location)
