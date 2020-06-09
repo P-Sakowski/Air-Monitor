@@ -20,6 +20,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <ActivityIndicator
+                IsRunning="{Binding ActivityIndicator}"
+                IsVisible="{Binding ActivityIndicator}"
+                Style="{StaticResource activityIndicatorCenter}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

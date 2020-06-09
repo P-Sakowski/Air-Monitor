@@ -19,9 +19,16 @@ namespace AirMonitor.ViewModels
     class HomeViewModel: BaseViewModel
     {
         private const string URL = "https://airapi.airly.eu/v2/";
-        private const string ApiKey = "xMyHABfmXx2ix98m1vRziQzBGERuHaOR";
-        private const string Type = "installations/nearest";
-        private const string Type2 = "measurements/installation";
+        private const string ApiKey = "BwRaqdEaUYMDxSrfHDrzyaVLedlhN7HL";
+        private const string InstallationURL = "installations/nearest";
+        private const string MeasurementURL = "measurements/installation";
+
+        private bool activityIndicator;
+        public bool ActivityIndicator
+        {
+            get { return activityIndicator; }
+            set { SetProperty(ref activityIndicator, value); } 
+        }
         public List<Measurement> Measurements { get; set; }
         private ObservableCollection<Measurement> _MeasurementList = new ObservableCollection<Measurement>();
         public ObservableCollection<Measurement> MeasurementList { get { return _MeasurementList; } set { _MeasurementList = value; OnPropertyChanged(nameof(MeasurementList)); } }
@@ -42,12 +49,13 @@ namespace AirMonitor.ViewModels
 
         public async Task Initialize()
         {
+            ActivityIndicator = true; //loader: ON
             Location location = await GetLocation();
             IEnumerable<Installation> installations = await GetInstallations(location);
             IEnumerable<Measurement> measurements = await GetMeasurements(installations);
+            ActivityIndicator = false; //loader: OFF
             Measurements = new List<Measurement>(measurements);
             MeasurementList = new ObservableCollection<Measurement>(Measurements);
-            Console.WriteLine();
         }
 
         public async Task<IEnumerable<Installation>> GetInstallations(Location location)
@@ -55,7 +63,7 @@ namespace AirMonitor.ViewModels
             string lat = (location.Latitude +0.01).ToString(CultureInfo.InvariantCulture);
             string lng = (location.Longitude + 0.01).ToString(CultureInfo.InvariantCulture);
             string query = $"?lat={lat}&lng={lng}&maxDistanceKM=-1&maxResults=1";
-            string url = URL + Type + query;
+            string url = URL + InstallationURL + query;
 
             IEnumerable<Installation> response = await GetHttpResponseAsync<IEnumerable<Installation>>(url);
             return response;
@@ -159,7 +167,7 @@ namespace AirMonitor.ViewModels
             foreach (Installation installation in installations)
             {
                 string query = $"?installationId={installation.Id}";
-                string url = URL + Type2 + query;
+                string url = URL + MeasurementURL + query;
 
                 Measurement response = await GetHttpResponseAsync<Measurement>(url);
 

@@ -196,4 +196,17 @@
             Property="ThumbColor"
             Value="{StaticResource LightBlue}" />
     </Style>
+    <Style
+        x:Key="activityIndicatorCenter"
+        TargetType="ActivityIndicator">
+        <Setter
+            Property="VerticalOptions"
+            Value="Center" />
+        <Setter
+            Property="HorizontalOptions"
+            Value="Center" />
+        <Setter
+            Property="Color"
+            Value="{StaticResource LightBlue}" />
+    </Style>
 </ResourceDictionary>
