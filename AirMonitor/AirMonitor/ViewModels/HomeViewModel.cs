@@ -18,11 +18,6 @@ namespace AirMonitor.ViewModels
 {
     class HomeViewModel: BaseViewModel
     {
-        private const string URL = "https://airapi.airly.eu/v2/";
-        private const string ApiKey = "BwRaqdEaUYMDxSrfHDrzyaVLedlhN7HL";
-        private const string InstallationURL = "installations/nearest";
-        private const string MeasurementURL = "measurements/installation";
-
         private bool activityIndicator;
         public bool ActivityIndicator
         {
@@ -63,7 +58,7 @@ namespace AirMonitor.ViewModels
             string lat = (location.Latitude +0.01).ToString(CultureInfo.InvariantCulture);
             string lng = (location.Longitude + 0.01).ToString(CultureInfo.InvariantCulture);
             string query = $"?lat={lat}&lng={lng}&maxDistanceKM=-1&maxResults=1";
-            string url = URL + InstallationURL + query;
+            string url = App.URL + App.InstallationURL + query;
 
             IEnumerable<Installation> response = await GetHttpResponseAsync<IEnumerable<Installation>>(url);
             return response;
@@ -73,11 +68,11 @@ namespace AirMonitor.ViewModels
         {
             HttpClient client = new HttpClient
             {
-                BaseAddress = new Uri(URL)
+                BaseAddress = new Uri(App.URL)
             };
 
             client.DefaultRequestHeaders.Add("Accept", "application/json");
-            client.DefaultRequestHeaders.Add("apikey", ApiKey);
+            client.DefaultRequestHeaders.Add("apikey", App.ApiKey);
             client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip");
             return client;
         }
@@ -167,7 +162,7 @@ namespace AirMonitor.ViewModels
             foreach (Installation installation in installations)
             {
                 string query = $"?installationId={installation.Id}";
-                string url = URL + MeasurementURL + query;
+                string url = App.URL + App.MeasurementURL + query;
 
                 Measurement response = await GetHttpResponseAsync<Measurement>(url);
 

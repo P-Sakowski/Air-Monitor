@@ -11,12 +11,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="config.json" />
     <None Remove="Images\MainMenu_icon.png" />
     <None Remove="Images\question_mark.png" />
     <None Remove="Images\Settings_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="config.json" />
     <EmbeddedResource Include="Images\MainMenu_icon.png" />
     <EmbeddedResource Include="Images\question_mark.png" />
     <EmbeddedResource Include="Images\Settings_icon.png" />
