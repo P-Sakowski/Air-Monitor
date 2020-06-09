@@ -13,5 +13,13 @@ namespace AirMonitor.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        protected void SetProperty<T>(ref T field, T value, [CallerMemberName] string fieldName = null)
+        {
+            if (!field.Equals(value))
+            {
+                field = value;
+                OnPropertyChanged(fieldName);
+            }
+        }
     }
 }

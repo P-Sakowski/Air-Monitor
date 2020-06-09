@@ -18,11 +18,7 @@ namespace AirMonitor.ViewModels
         {
             set
             {
-                if (caqi != value)
-                {
-                    caqi = value;
-                    OnPropertyChanged("CAQI");
-                }
+                SetProperty(ref caqi, value);
             }
             get
             {
@@ -32,11 +28,7 @@ namespace AirMonitor.ViewModels
         public string CAQIShortInfo{
             set
             {
-                if (caqiShortInfo != value)
-                {
-                    caqiShortInfo = value;
-                    OnPropertyChanged("CAQIShortInfo");
-                }
+                SetProperty(ref caqiShortInfo, value);
             }
             get
             {
@@ -47,11 +39,7 @@ namespace AirMonitor.ViewModels
         {
             set
             {
-                if (caqiLongInfo != value)
-                {
-                    caqiLongInfo = value;
-                    OnPropertyChanged("CAQILongInfo");
-                }
+                SetProperty(ref caqiLongInfo, value);
             }
             get
             {
@@ -62,11 +50,7 @@ namespace AirMonitor.ViewModels
         {
             set
             {
-                if (pm25 != value)
-                {
-                    pm25 = value;
-                    OnPropertyChanged("PM25");
-                }
+                SetProperty(ref pm25, value);
             }
             get
             {
@@ -77,11 +61,7 @@ namespace AirMonitor.ViewModels
         {
             set
             {
-                if (pm25Percentage != value)
-                {
-                    pm25Percentage = value;
-                    OnPropertyChanged("PM25Percentage");
-                }
+                SetProperty(ref pm25Percentage, value);
             }
             get
             {
@@ -92,11 +72,7 @@ namespace AirMonitor.ViewModels
         {
             set
             {
-                if (pm10 != value)
-                {
-                    pm10 = value;
-                    OnPropertyChanged("PM10");
-                }
+                SetProperty(ref pm10, value);
             }
             get
             {
@@ -107,11 +83,7 @@ namespace AirMonitor.ViewModels
         {
             set
             {
-                if (pm10Percentage != value)
-                {
-                    pm10Percentage = value;
-                    OnPropertyChanged("PM10Percentage");
-                }
+                SetProperty(ref pm10Percentage, value);
             }
             get
             {
@@ -122,11 +94,7 @@ namespace AirMonitor.ViewModels
         {
             set
             {
-                if (humidity != value)
-                {
-                    humidity = value;
-                    OnPropertyChanged("Humidity");
-                }
+                SetProperty(ref humidity, value);
             }
             get
             {
@@ -137,11 +105,7 @@ namespace AirMonitor.ViewModels
         {
             set
             {
-                if (pressure != value)
-                {
-                    pressure = value;
-                    OnPropertyChanged("Pressure");
-                }
+                SetProperty(ref pressure, value);
             }
             get
             {
