@@ -1,7 +1,9 @@
-﻿using System;
+﻿using AirMonitor.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Xamarin.Forms;
@@ -19,11 +21,6 @@ namespace AirMonitor.ViewModels
                 if (caqi != value)
                 {
                     caqi = value;
-                    if (caqi < 70)
-                    {
-                        this.caqiShortInfo = "Świetna jakość!";
-                        this.caqiLongInfo = "Możesz bezpiecznie wyjść z domu bez swojej maski anty-smogowej i nie bać się o swoje zdrowie.";
-                    }
                     OnPropertyChanged("CAQI");
                 }
             }
@@ -68,7 +65,6 @@ namespace AirMonitor.ViewModels
                 if (pm25 != value)
                 {
                     pm25 = value;
-                    this.pm25Percentage = 4 * pm25;
                     OnPropertyChanged("PM25");
                 }
             }
@@ -99,7 +95,6 @@ namespace AirMonitor.ViewModels
                 if (pm10 != value)
                 {
                     pm10 = value;
-                    this.pm10Percentage = 2 * pm10;
                     OnPropertyChanged("PM10");
                 }
             }
@@ -153,13 +148,17 @@ namespace AirMonitor.ViewModels
                 return pressure;
             }
         }
-        public DetailsViewModel()
+        public DetailsViewModel(Measurement measurement)
         {
-            this.CAQI = 57;
-            this.PM25 = 34;
-            this.PM10 = 67;
-            this.Pressure = 1026;
-            this.Humidity = 95;
+            this.CAQI = (int)measurement.Current.Indexes?.FirstOrDefault(index => index.Name == "AIRLY_CAQI").Value;
+            this.PM25 = (int)measurement.Current.Values?.FirstOrDefault(value => value.Name == "PM25").Value;
+            this.PM10 = (int)measurement.Current.Values?.FirstOrDefault(value => value.Name == "PM10").Value;
+            this.Pressure = (int)measurement.Current.Values?.FirstOrDefault(value => value.Name == "PRESSURE").Value;
+            this.Humidity = (int)measurement.Current.Values?.FirstOrDefault(value => value.Name == "HUMIDITY").Value;
+            this.PM25Percentage = (int)measurement.Current.Standards?.FirstOrDefault(standard => standard.Pollutant == "PM25").Percent;
+            this.PM10Percentage = (int)measurement.Current.Standards?.FirstOrDefault(standard => standard.Pollutant == "PM10").Percent;
+            this.caqiShortInfo = measurement.Current.Indexes?.FirstOrDefault(index => index.Name == "AIRLY_CAQI").Description;
+            this.caqiLongInfo = measurement.Current.Indexes?.FirstOrDefault(index => index.Name == "AIRLY_CAQI").Advice; 
         }
     }
     public class IntToDoubleConverter : IValueConverter

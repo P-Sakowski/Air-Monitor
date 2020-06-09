@@ -10,5 +10,6 @@ namespace AirMonitor.Models
         public IEnumerable<MeasurementItem> History { get; set; }
         public IEnumerable<MeasurementItem> Forecast { get; set; }
         public Installation Installation { get; set; }
+        public int CAQIValue { get; set; }
     }
 }

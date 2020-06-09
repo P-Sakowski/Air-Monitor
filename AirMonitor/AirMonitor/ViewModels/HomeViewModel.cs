@@ -12,6 +12,7 @@ using AirMonitor.Models;
 using System.Web;
 using System.Net.Http;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace AirMonitor.ViewModels
 {
@@ -32,11 +33,11 @@ namespace AirMonitor.ViewModels
             Initialize();
         }
 
-        public ICommand Navigate => new Command(NavigateToPage);
+        public ICommand Navigate => new Command<Measurement>(NavigateToPage);
 
-        public void NavigateToPage()
+        public void NavigateToPage(Measurement measurement)
         {
-            this.Navigation.PushAsync(new DetailsPage());
+            this.Navigation.PushAsync(new DetailsPage(measurement));
         }
 
         public async Task Initialize()
@@ -53,7 +54,7 @@ namespace AirMonitor.ViewModels
         {
             string lat = (location.Latitude +0.01).ToString(CultureInfo.InvariantCulture);
             string lng = (location.Longitude + 0.01).ToString(CultureInfo.InvariantCulture);
-            string query = $"?lat={lat}&lng={lng}&maxDistanceKM=5&maxResults=1";
+            string query = $"?lat={lat}&lng={lng}&maxDistanceKM=-1&maxResults=10";
             string url = URL + Type + query;
 
             IEnumerable<Installation> response = await GetHttpResponseAsync<IEnumerable<Installation>>(url);
@@ -159,6 +160,7 @@ namespace AirMonitor.ViewModels
                 if (response != null)
                 {
                     response.Installation = installation;
+                    response.CAQIValue = (int)response.Current.Indexes?.FirstOrDefault(index => index.Name == "AIRLY_CAQI").Value;
                     measurements.Add(response);
                 }
             }
