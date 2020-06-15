@@ -13,17 +13,20 @@ using System.Linq;
 
 namespace AirMonitor
 {
-    public partial class App : Application
+    public partial class App : Xamarin.Forms.Application
     {
         public static string URL { get; set; }
         public static string MeasurementURL { get; set; }
         public static string InstallationURL { get; set; }
         public static string ApiKey { get; set; }
+        public static DatabaseHelper Database { get; set; }
         public App()
         {
             InitializeComponent();
 
             InitTask();
+
+            Database = new DatabaseHelper();
 
             MainPage = new MainTabbedPage();
         }
