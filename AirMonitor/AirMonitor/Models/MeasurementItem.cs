@@ -11,5 +11,10 @@ namespace AirMonitor.Models
         public IEnumerable<ParameterValue> Values { get; set; }
         public IEnumerable<Index> Indexes { get; set; }
         public IEnumerable<Standard> Standards { get; set; }
+
+        public MeasurementItem()
+        {
+
+        }
     }
 }

@@ -10,5 +10,10 @@ namespace AirMonitor.Models
         public string Description { get; set; }
         public string Logo { get; set; }
         public string Link { get; set; }
+
+        public Sponsor()
+        {
+
+        }
     }
 }

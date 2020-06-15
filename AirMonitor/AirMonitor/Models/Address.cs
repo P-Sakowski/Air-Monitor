@@ -13,5 +13,10 @@ namespace AirMonitor.Models
         public string DisplayAddress1 { get; set; }
         public string DisplayAddress2 { get; set; }
         public string DisplayAddressFull { get { return this.DisplayAddress1 + ", " + DisplayAddress2; } }
+
+        public Address()
+        {
+
+        }
     }
 }
