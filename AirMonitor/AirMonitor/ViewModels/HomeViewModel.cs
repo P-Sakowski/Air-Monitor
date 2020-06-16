@@ -47,6 +47,7 @@ namespace AirMonitor.ViewModels
             ActivityIndicator = true; //loader: ON
             Location location = await GetLocation();
             IEnumerable<Installation> installations = await GetInstallations(location);
+            App.Database.InsertInstallations(installations);
             IEnumerable<Measurement> measurements = await GetMeasurements(installations);
             ActivityIndicator = false; //loader: OFF
             Measurements = new List<Measurement>(measurements);

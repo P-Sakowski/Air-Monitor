@@ -16,13 +16,26 @@ namespace AirMonitor
         private static readonly string DatabasePath = Path.Combine(DatabaseFolder,DatabaseName);
         public DatabaseHelper()
         {
-            this.DatabaseConnection = new SQLiteConnection(DatabasePath, SQLiteFlags);
+            DatabaseConnection = new SQLiteConnection(DatabasePath, SQLiteFlags);
             DatabaseConnection.CreateTable<InstallationEntity>();
             DatabaseConnection.CreateTable<MeasurementEntity>();
             DatabaseConnection.CreateTable<MeasurementItemEntity>();
             DatabaseConnection.CreateTable<ParameterValue>();
             DatabaseConnection.CreateTable<Index>();
             DatabaseConnection.CreateTable<Standard>();
+        }
+        public void InsertInstallations(IEnumerable<Installation> installations)
+        {
+            List<InstallationEntity> installationEntities = new List<InstallationEntity>();
+            foreach (Installation installation in installations)
+            {
+                InstallationEntity installationEntity = new InstallationEntity(installation);
+                installationEntities.Add(installationEntity);
+            }
+            DatabaseConnection.BeginTransaction();
+            DatabaseConnection.DeleteAll<InstallationEntity>();
+            DatabaseConnection.InsertAll(installationEntities);
+            DatabaseConnection.Commit();
         }
     }
 }
