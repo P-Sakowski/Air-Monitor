@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,6 +19,14 @@ namespace AirMonitor.Models
         public MeasurementItemEntity()
         {
 
+        }
+        public MeasurementItemEntity(Measurement measurement)
+        {
+            FromDateTime = measurement.Current.FromDateTime;
+            TillDateTime = measurement.Current.TillDateTime;
+            Values = JsonConvert.SerializeObject(measurement.Current.Values);
+            Indexes = JsonConvert.SerializeObject(measurement.Current.Indexes);
+            Standards = JsonConvert.SerializeObject(measurement.Current.Standards);
         }
     }
 }

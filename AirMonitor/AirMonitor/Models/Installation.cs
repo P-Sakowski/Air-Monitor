@@ -7,7 +7,7 @@ namespace AirMonitor.Models
 {
     public class Installation
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public Address Address { get; set; }
         public Location Location { get; set; }
         public decimal Elevation { get; set; }

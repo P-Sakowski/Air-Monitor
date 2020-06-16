@@ -32,10 +32,33 @@ namespace AirMonitor
                 InstallationEntity installationEntity = new InstallationEntity(installation);
                 installationEntities.Add(installationEntity);
             }
-            DatabaseConnection.BeginTransaction();
-            DatabaseConnection.DeleteAll<InstallationEntity>();
-            DatabaseConnection.InsertAll(installationEntities);
-            DatabaseConnection.Commit();
+            DatabaseConnection.RunInTransaction(() =>
+            {
+                DatabaseConnection.DeleteAll<InstallationEntity>();
+                DatabaseConnection.InsertAll(installationEntities);
+            });
+        }
+        public void InsertMeasurements(IEnumerable<Measurement> measurements)
+        {
+            DatabaseConnection.RunInTransaction(() =>
+            {
+                DatabaseConnection.DeleteAll<MeasurementEntity>();
+                DatabaseConnection.DeleteAll<MeasurementItemEntity>();
+                DatabaseConnection.DeleteAll<ParameterValue>();
+                DatabaseConnection.DeleteAll<Index>();
+                DatabaseConnection.DeleteAll<Standard>();
+                foreach (Measurement measurement in measurements)
+                {
+                    DatabaseConnection.InsertAll(measurement.Current.Values, false);
+                    DatabaseConnection.InsertAll(measurement.Current.Indexes, false);
+                    DatabaseConnection.InsertAll(measurement.Current.Standards, false);
+
+                    MeasurementItemEntity measurementItemEntity = new MeasurementItemEntity(measurement);
+                    DatabaseConnection.Insert(measurementItemEntity);
+                    MeasurementEntity measurementEntity = new MeasurementEntity(measurement, measurementItemEntity);
+                    DatabaseConnection.Insert(measurementEntity);
+                }
+            });
         }
     }
 }
