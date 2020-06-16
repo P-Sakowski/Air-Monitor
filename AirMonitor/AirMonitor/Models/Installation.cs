@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Essentials;
@@ -17,6 +18,16 @@ namespace AirMonitor.Models
         public Installation()
         {
 
+        }
+        public Installation(InstallationEntity installationEntity)
+        {
+            int.TryParse(installationEntity.Id, out int installationEntityId);
+            Id = installationEntityId;
+            Address = JsonConvert.DeserializeObject<Address>(installationEntity.Address);
+            Location = JsonConvert.DeserializeObject<Location>(installationEntity.Location);
+            Elevation = installationEntity.Elevation;
+            Airly = installationEntity.Airly;
+            Sponsor = JsonConvert.DeserializeObject<Sponsor>(installationEntity.Sponsor);
         }
     }
 }

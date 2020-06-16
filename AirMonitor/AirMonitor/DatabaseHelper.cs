@@ -3,6 +3,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace AirMonitor
@@ -59,6 +60,17 @@ namespace AirMonitor
                     DatabaseConnection.Insert(measurementEntity);
                 }
             });
+        }
+        public List<Installation> SelectInstallations()
+        {
+            List<InstallationEntity> installationsEntities = DatabaseConnection.Table<InstallationEntity>().ToList();
+            List<Installation> installations = new List<Installation>();
+            foreach (InstallationEntity installationEntity in installationsEntities)
+            {
+                Installation installation = new Installation(installationEntity);
+                installations.Add(installation);
+            }
+            return installations;
         }
     }
 }
