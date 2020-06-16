@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,6 +16,13 @@ namespace AirMonitor.Models
         public Measurement()
         {
 
+        }
+        public Measurement(MeasurementEntity measurementEntity, Installation installation, MeasurementItem measurementItem)
+        {
+            Current = measurementItem;
+            History = JsonConvert.DeserializeObject<IEnumerable<MeasurementItem>>(measurementEntity.History);
+            Forecast = JsonConvert.DeserializeObject<IEnumerable<MeasurementItem>>(measurementEntity.Forecast);
+            Installation = installation;
         }
     }
 }

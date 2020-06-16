@@ -1,4 +1,5 @@
 ﻿using AirMonitor.Models;
+using Newtonsoft.Json.Linq;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -71,6 +72,45 @@ namespace AirMonitor
                 installations.Add(installation);
             }
             return installations;
+        }
+        public List<Measurement> SelectMeasurements()
+        {
+            List<MeasurementEntity> measurementEntities = DatabaseConnection.Table<MeasurementEntity>().ToList();
+            List<Measurement> measurements = new List<Measurement>();
+            foreach (MeasurementEntity measurementEntity in measurementEntities)
+            {
+                InstallationEntity installationEntity = DatabaseConnection.Get<InstallationEntity>(measurementEntity.InstallationID);
+                Installation installation = new Installation(installationEntity);
+                MeasurementItemEntity measurementItemEntity = DatabaseConnection.Get<MeasurementItemEntity>(measurementEntity.CurrentID);
+
+                var valuesArray = JArray.Parse(measurementItemEntity.Values);
+                var indexesArray = JArray.Parse(measurementItemEntity.Indexes);
+                var standardsArray = JArray.Parse(measurementItemEntity.Standards);
+
+                var valueIDs = ParseJSONToIntArray(valuesArray, "Id");
+                var indexIDs = ParseJSONToIntArray(indexesArray, "Id");
+                var standardIDs = ParseJSONToIntArray(standardsArray, "Id");
+
+                var measurementValues = DatabaseConnection.Table<ParameterValue>().Where(x => valueIDs.Contains(x.Id)).ToList();
+                var measurementIndexes = DatabaseConnection.Table<Index>().Where(x => indexIDs.Contains(x.Id)).ToList();
+                var measurementStandards = DatabaseConnection.Table<Standard>().Where(x => standardIDs.Contains(x.Id)).ToList();
+
+                MeasurementItem measurementItem = new MeasurementItem(measurementItemEntity, measurementValues, measurementIndexes, measurementStandards);
+                Measurement measurement = new Measurement(measurementEntity, installation, measurementItem);
+                measurements.Add(measurement);
+            }
+            return measurements;
+        }
+        public int[] ParseJSONToIntArray(JArray JSONArray, string key)
+        {
+            JObject JObject;
+            int[] arr = new int[JSONArray.Count];
+            for (int i = 0; i < JSONArray.Count; i++)
+            {
+                JObject = JObject.Parse(JSONArray[i].ToString());
+                arr[i] = (int)JObject[key];
+            }
+            return arr;
         }
     }
 }

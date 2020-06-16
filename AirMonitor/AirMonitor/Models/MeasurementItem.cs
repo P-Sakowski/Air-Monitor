@@ -16,5 +16,13 @@ namespace AirMonitor.Models
         {
 
         }
+        public MeasurementItem(MeasurementItemEntity measurementItemEntity, List<ParameterValue> parameterValues, List<Index> indices, List<Standard> standards)
+        {
+            FromDateTime = measurementItemEntity.FromDateTime;
+            TillDateTime = measurementItemEntity.TillDateTime;
+            Values = parameterValues;
+            Indexes = indices;
+            Standards = standards;
+        }
     }
 }
