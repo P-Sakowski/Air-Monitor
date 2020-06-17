@@ -112,5 +112,20 @@ namespace AirMonitor
             }
             return arr;
         }
+        public bool CheckDataTimeliness()
+        {
+            DateTime UTCDateTime = DateTime.Now.AddHours(-2);
+
+            List<Measurement> measurements = SelectMeasurements();
+
+            if (measurements.Count == 0 || measurements.Any(measurement => measurement.Current.TillDateTime < UTCDateTime))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            } 
+        }
     }
 }
