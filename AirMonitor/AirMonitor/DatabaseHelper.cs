@@ -9,13 +9,14 @@ using System.Text;
 
 namespace AirMonitor
 {
-    public class DatabaseHelper
+    public class DatabaseHelper : IDisposable
     {
         private static readonly SQLiteOpenFlags SQLiteFlags = SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create | SQLiteOpenFlags.FullMutex;
         private SQLiteConnection DatabaseConnection { get; set; }
         private static readonly string DatabaseName = "AirMonitor.db";
         private static readonly string DatabaseFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-        private static readonly string DatabasePath = Path.Combine(DatabaseFolder,DatabaseName);
+        private static readonly string DatabasePath = Path.Combine(DatabaseFolder, DatabaseName);
+        private bool disposed = false;
         public DatabaseHelper()
         {
             DatabaseConnection = new SQLiteConnection(DatabasePath, SQLiteFlags);
@@ -126,6 +127,23 @@ namespace AirMonitor
             {
                 return true;
             } 
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    DatabaseConnection.Dispose();
+                    DatabaseConnection = null;
+                }
+                disposed = true;
+            }
         }
     }
 }

@@ -59,14 +59,24 @@ namespace AirMonitor
 
         protected override void OnStart()
         {
+            if (Database == null)
+            {
+                Database = new DatabaseHelper();
+            }
         }
 
         protected override void OnSleep()
         {
+            Database.Dispose();
+            Database = null;
         }
 
         protected override void OnResume()
         {
+            if (Database == null)
+            {
+                Database = new DatabaseHelper();
+            }
         }
     }
 }
