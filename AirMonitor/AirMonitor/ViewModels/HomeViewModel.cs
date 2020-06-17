@@ -44,22 +44,25 @@ namespace AirMonitor.ViewModels
 
         public async Task Initialize()
         {
-            IEnumerable<Measurement> measurements;
-            IEnumerable<Installation> installations;
+            IEnumerable<Measurement> measurements = null;
+            IEnumerable<Installation> installations = null;
             ActivityIndicator = true; //loader: ON
-            Location location = await GetLocation();
-            if (App.Database.CheckDataTimeliness() == true)
+            await Task.Run(async () =>
             {
-                installations = App.Database.SelectInstallations();
-                measurements = App.Database.SelectMeasurements();
-            }
-            else
-            {
-                installations = await GetInstallations(location); 
-                measurements = await GetMeasurements(installations);
-            }
-            App.Database.InsertInstallations(installations);
-            App.Database.InsertMeasurements(measurements);
+                Location location = await GetLocation();
+                if (App.Database.CheckDataTimeliness() == true)
+                {
+                    installations = App.Database.SelectInstallations();
+                    measurements = App.Database.SelectMeasurements();
+                }
+                else
+                {
+                    installations = await GetInstallations(location);
+                    measurements = await GetMeasurements(installations);
+                }
+                App.Database.InsertInstallations(installations);
+                App.Database.InsertMeasurements(measurements);
+            });
             ActivityIndicator = false; //loader: OFF
             Measurements = new List<Measurement>(measurements);
             MeasurementList = new ObservableCollection<Measurement>(Measurements);
