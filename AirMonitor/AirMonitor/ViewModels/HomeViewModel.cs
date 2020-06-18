@@ -24,6 +24,30 @@ namespace AirMonitor.ViewModels
             get { return activityIndicator; }
             set { SetProperty(ref activityIndicator, value); } 
         }
+        private bool _isRefreshing = false;
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set
+            {
+                _isRefreshing = value;
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    IsRefreshing = true;
+
+                    await Initialize();
+
+                    IsRefreshing = false;
+                });
+            }
+        }
         public List<Measurement> Measurements { get; set; }
         private ObservableCollection<Measurement> _MeasurementList = new ObservableCollection<Measurement>();
         public ObservableCollection<Measurement> MeasurementList { get { return _MeasurementList; } set { _MeasurementList = value; OnPropertyChanged(nameof(MeasurementList)); } }
@@ -64,15 +88,18 @@ namespace AirMonitor.ViewModels
                 App.Database.InsertMeasurements(measurements);
             });
             ActivityIndicator = false; //loader: OFF
-            Measurements = new List<Measurement>(measurements);
-            MeasurementList = new ObservableCollection<Measurement>(Measurements);
+            if(measurements != null)
+            {
+                Measurements = new List<Measurement>(measurements);
+                MeasurementList = new ObservableCollection<Measurement>(Measurements);
+            }
         }
 
         public async Task<IEnumerable<Installation>> GetInstallations(Location location)
         {
-            string lat = (location.Latitude +0.01).ToString(CultureInfo.InvariantCulture);
+            string lat = (location.Latitude + 0.01).ToString(CultureInfo.InvariantCulture);
             string lng = (location.Longitude + 0.01).ToString(CultureInfo.InvariantCulture);
-            string query = $"?lat={lat}&lng={lng}&maxDistanceKM=-1&maxResults=1";
+            string query = $"?lat={lat}&lng={lng}&maxDistanceKM=-1&maxResults=10";
             string url = App.URL + App.InstallationURL + query;
 
             IEnumerable<Installation> response = await GetHttpResponseAsync<IEnumerable<Installation>>(url);

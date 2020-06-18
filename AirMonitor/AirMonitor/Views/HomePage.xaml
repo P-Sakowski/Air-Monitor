@@ -11,7 +11,10 @@
             <ListView
                 ItemsSource="{Binding MeasurementList}"
                 ItemTapped="GoToMeasurementDetails"
-                SelectionMode="None">
+                SelectionMode="None"
+                IsPullToRefreshEnabled="True"
+                RefreshCommand="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsRefreshing}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell

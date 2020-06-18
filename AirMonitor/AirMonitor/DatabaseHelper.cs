@@ -29,6 +29,10 @@ namespace AirMonitor
         }
         public void InsertInstallations(IEnumerable<Installation> installations)
         {
+            if(installations == null)
+            {
+                return;
+            }
             List<InstallationEntity> installationEntities = new List<InstallationEntity>();
             foreach (Installation installation in installations)
             {
@@ -43,6 +47,10 @@ namespace AirMonitor
         }
         public void InsertMeasurements(IEnumerable<Measurement> measurements)
         {
+            if (measurements == null)
+            {
+                return;
+            }
             DatabaseConnection.RunInTransaction(() =>
             {
                 DatabaseConnection.DeleteAll<MeasurementEntity>();
